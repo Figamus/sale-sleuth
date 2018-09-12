@@ -16,46 +16,46 @@ export default class Registration extends Component {
 
     handleRegistration = (e) => {
         e.preventDefault();
-        dbCalls.getAll("users")
-        .then(users => {
-            let userNameExists = users.find(u => u.userName === this.state.userName);
-            if(userNameExists){
-                sessionStorage.setItem("user", JSON.stringify(userNameExists))
-                this.props.history.push("/")
-            } else {  
-                dbCalls.post("users", {userName: this.state.userName, password: this.state.password})
-                .then(() => dbCalls.getAll("users"))
-                .then(users => {
-                    userNameExists = users.find(u => u.userName === this.state.userName);
-                    sessionStorage.setItem("user", JSON.stringify(userNameExists))
-                    this.props.history.push("/")
-                })
-            }
+        let user = {
+            userName: this.state.userName,
+            email: this.state.email,
+            password: this.state.password
+        }
+        dbCalls.post("users", user)
+        .then(() => {
+            alert("You have succefully registered. Please log In");
+            this.props.history.push("/login")
         })
     }
 
+    handleLogin = (e) => {
+        e.preventDefault();
+        this.props.history.push("/login")}
+        
     render() {
         return (
-            <form onSubmit={this.handleRegistration}>
+            <form>
+                <h1 className="h3 mb-3 font-weight-normal">
+                    Please Register
+                </h1>
                 <fieldset>
-                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                    <label htmlFor="inputEmail">User Name: </label>
-                    <input onChange={this.handleFieldChange} type="text"
-                    id="userName"
-                    placeholder="User Name"
-                    required="" autoFocus="" /></fieldset>
+                    <label htmlFor="inputuserName">User Name: </label>
+                    <input onChange={this.handleFieldChange} type="text" id="userName" placeholder="User Name" required="" autoFocus="" />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="inputEmail">E-mail: </label>
+                    <input onChange={this.handleFieldChange} type="email" id="email" placeholder="E-mail" required="" autoFocus="" />
+                </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword">Password: </label>
-                    <input onChange={this.handleFieldChange} type="password"
-                    id="password"
-                    placeholder="Password"
-                    required="" /></fieldset>
-                {/* <fieldset>
-                    <label>Remember Me</label>
-                    <input type="checkbox" onChange={this.checkbox}></input>
-                </fieldset> */}
+                    <input onChange={this.handleFieldChange} type="password" id="password" placeholder="Password" required="" />
+                </fieldset>
                 <fieldset>
-                    <button type="submit">Sign in</button></fieldset>
+                    <button type="submit" onClick={this.handleRegistration}>Register</button>
+                </fieldset>
+                <fieldset>
+                    <button type="submit" onClick={this.handleLogin}>Return to Login</button>
+                </fieldset>
             </form>
         )
     }

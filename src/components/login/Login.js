@@ -3,8 +3,8 @@ import dbCalls from "../../modules/dbCalls"
 
 export default class Login extends Component {
     state = {
-        password: "",
-        userName: ""
+        userName: "",
+        password: ""
     }
 
     handleFieldChange = (evt) => {
@@ -17,44 +17,44 @@ export default class Login extends Component {
         e.preventDefault();
         dbCalls.getAll("users")
         .then(users => {
-            let userNameExists = users.find(u => u.userName === this.state.userName);
-            if(userNameExists){
-                sessionStorage.setItem("user", JSON.stringify(userNameExists))
-                this.props.history.push("/")
-            } else {  
-                dbCalls.post("users", {userName: this.state.userName, password: this.state.password})
-                .then(() => dbCalls.getAll("users"))
-                .then(users => {
-                    userNameExists = users.find(u => u.userName === this.state.userName);
-                    sessionStorage.setItem("user", JSON.stringify(userNameExists))
-                    this.props.history.push("/")
-                })
-            }
-        })
-    }
+            let userMatched = users.find(user => user.userName === this.state.userName && user.password === this.state.password)
+                if (userMatched) {
+                    sessionStorage.setItem("user", JSON.stringify(userMatched));
+                    alert("You have succefully logged in.");
+                    this.props.history.push("/");
+                } else {
+                    alert("Username does not exist. Please Register")
+                }
+            })
+        }
+
+    handleRegistration = (e) => {
+        e.preventDefault();
+        this.props.history.push("/registration")}
 
     render() {
         return (
-            <form onSubmit={this.handleLogin}>
+            <form>
+                <h1 className="h3 mb-3 font-weight-normal">
+                    Please Sign In
+                </h1>
                 <fieldset>
-                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                     <label htmlFor="inputEmail">User Name: </label>
-                    <input onChange={this.handleFieldChange} type="text"
-                    id="userName"
-                    placeholder="User Name"
-                    required="" autoFocus="" /></fieldset>
+                    <input onChange={this.handleFieldChange} type="text" id="userName" placeholder="User Name" required="" autoFocus="" />
+                </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword">Password: </label>
-                    <input onChange={this.handleFieldChange} type="password"
-                    id="password"
-                    placeholder="Password"
-                    required="" /></fieldset>
-                {/* <fieldset>
+                    <input onChange={this.handleFieldChange} type="password" id="password" placeholder="Password" required="" /></fieldset>
+                <fieldset>
                     <label>Remember Me</label>
                     <input type="checkbox" onChange={this.checkbox}></input>
-                </fieldset> */}
+                </fieldset>
                 <fieldset>
-                    <button type="submit">Sign in</button></fieldset>
+                    <button type="submit" onClick={this.handleLogin}>Sign in</button>
+                </fieldset>
+                <fieldset>
+                    <button type="submit" onClick={this.handleRegistration}>Register</button>
+                </fieldset>
             </form>
         )
     }
