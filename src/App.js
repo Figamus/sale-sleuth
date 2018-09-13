@@ -7,11 +7,6 @@ import AuthRoute from "./AuthRoute";
 import './App.css';
 
 export default class App extends Component {
-  handleLogout = () => {
-    sessionStorage.removeItem("user");
-    this.setState({ login: false })
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -21,7 +16,8 @@ export default class App extends Component {
         <Route exact path="/login" render={(props) => {
           return <Login {...props}/>
           }} />
-        <AuthRoute path="/" Destination={Main} />
+        <AuthRoute path="/" Destination={Main} 
+        {...this.Route}/>
       </React.Fragment>
     )
   }
