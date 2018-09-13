@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route } from 'react-router-dom';
+import Login from "./components/login/Login";
+import Registration from "./components/registration/Registration";
+import Main from "./components/Main";
+import AuthRoute from "./AuthRoute";
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
+  handleLogout = () => {
+    sessionStorage.removeItem("user");
+    this.setState({ login: false })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <React.Fragment>
+        <Route exact path="/registration" render={(props) => {
+          return <Registration {...props}/>
+          }} />
+        <Route exact path="/login" render={(props) => {
+          return <Login {...props}/>
+          }} />
+        <AuthRoute path="/" Destination={Main} />
+      </React.Fragment>
+    )
   }
 }
-
-export default App;
