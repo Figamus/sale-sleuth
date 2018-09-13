@@ -5,12 +5,14 @@ import Login from "./components/login/Login";
 const isAuthenticated = () =>
     sessionStorage.getItem("user") !== null
 
-const AuthRoute = ({ path, Destination}) =>
+const AuthRoute = ({ path, Destination, getActiveUser}) =>
     <Route exact path={path} render={props => {
         if (isAuthenticated()) {
-            return <Destination {...props} />
+            return <Destination {...props}
+            getActiveUser={getActiveUser} />
         } else {
-            return <Login {...props}/>
+            return <Login {...props}
+            getActiveUser={getActiveUser}/>
         }
     }} />
 

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css"
 
 
 export default class Overview extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>This is Overview</div>
+                <div>Welcome to Sale Sleuth. </div>
             </React.Fragment>
         )
     }

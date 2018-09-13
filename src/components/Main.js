@@ -8,11 +8,11 @@ export default class Main extends Component {
     render() {
         return (
             <React.Fragment>
+                <Route render={props => {
+                    return <Navbar {...props}/>
+                    }} />
                 <Route path="/" render={props => {
-                    return <div>
-                        <Navbar {...props}/>
-                        <Overview {...props}/>
-                        </div>
+                    return <Overview {...props}/>
                     }} />
             </React.Fragment>
         )
