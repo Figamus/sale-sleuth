@@ -3,6 +3,8 @@ import { Route } from 'react-router-dom';
 import Login from "./components/login/Login";
 import Registration from "./components/registration/Registration";
 import Main from "./components/Main";
+import User from "./components/user/User";
+import Tracking from "./components/tracking/Tracking";
 import AuthRoute from "./AuthRoute";
 import dbCalls from "./modules/dbCalls";
 import './App.css';
@@ -13,54 +15,55 @@ export default class App extends Component {
     allUsers: [],
     products: [],
     prices: []
-}
+  }
 
-componentDidMount() {
-  let retrievedUser = JSON.parse(sessionStorage.getItem("user"))
-  if (retrievedUser !== null) {
-      this.setState({
-      activeUser: retrievedUser
+  componentDidMount() {
+    let retrievedUser = JSON.parse(sessionStorage.getItem("user"))
+    if (retrievedUser !== null) {
+        this.setState({
+        activeUser: retrievedUser
+        })
+      } else {
+        this.setState({
+          activeUser: {}
+        })
+      }
+      dbCalls.getAll("users")
+      .then(allUsers => {
+          this.setState({
+              allUsers: allUsers
+          })
       })
-    } else {
-      this.setState({
-        activeUser: {}
+  }
+
+  allFunctions = {
+    getActiveUser: () => {
+    let stateToChange = JSON.parse(sessionStorage.getItem("user"))
+    this.setState({
+      activeUser: stateToChange
       })
     }
-    dbCalls.getAll("users")
-    .then(allUsers => {
-        this.setState({
-            allUsers: allUsers
-        })
-    })
-}
-
-getActiveUser = () => {
-  let stateToChange = JSON.parse(sessionStorage.getItem("user"))
-  this.setState({
-    activeUser: stateToChange
-  })
-}
+  }
 
   render() {
     return (
       <React.Fragment>
-
-
         <Route exact path="/registration" render={(props) => {
           return <Registration {...props}/>
           }} />
-
-
         <Route exact path="/login" render={(props) => {
           return <Login {...props}
           getActiveUser={this.getActiveUser}/>
           }} />
-
-
         <AuthRoute path="/" Destination={Main}
-        getActiveUser={this.getActiveUser}/>
-
-
+        mainState = {this.state}
+        allFunctions={this.allFunctions}/>
+        <AuthRoute path="/user" Destination={User}
+        mainState = {this.state}
+        allFunctions={this.allFunctions}/>
+        <AuthRoute path="/tracking" Destination={Tracking}
+        mainState = {this.state}
+        allFunctions={this.allFunctions}/>
       </React.Fragment>
     )
   }
