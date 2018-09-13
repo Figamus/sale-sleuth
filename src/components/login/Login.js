@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import dbCalls from "../../modules/dbCalls"
+import dbCalls from "../../modules/dbCalls";
 
 export default class Login extends Component {
     state = {
@@ -23,7 +23,7 @@ export default class Login extends Component {
                     alert("You have succefully logged in.");
                     this.props.history.push("/");
                 } else {
-                    alert("Username does not exist. Please Register")
+                alert("Username or Password is incorrect. If you do not have an account, please register.")
                 }
             })
         }
