@@ -13,8 +13,8 @@ export default class App extends Component {
   state = {
     activeUser: {},
     allUsers: [],
-    products: [],
-    prices: []
+    userTrackedProduct: [],
+    priceHistory: []
   }
 
   componentDidMount() {
@@ -34,6 +34,18 @@ export default class App extends Component {
               allUsers: allUsers
           })
       })
+      .then(() => dbCalls.getAll("userTrackedProduct"))
+      .then(userTrackedProduct => {
+        this.setState({
+          userTrackedProduct: userTrackedProduct
+          })
+      })
+      .then(() => dbCalls.getAll("priceHistory"))
+      .then(priceHistory => {
+        this.setState({
+          priceHistory: priceHistory
+          })
+      })
   }
 
   allFunctions = {
@@ -42,7 +54,10 @@ export default class App extends Component {
     this.setState({
       activeUser: stateToChange
       })
-    }
+    },
+    getProduct: (id) => {
+      dbCalls.getProduct(id)
+      .then((r) => r)}
   }
 
   render() {

@@ -9,6 +9,12 @@ export default Object.create(null, {
             .then(r => r.json())
         }
     },
+    getProduct: {
+        value: (id) => { 
+            return fetch(`http://localhost:5003/products/${id}`)
+            .then(r => r.json())
+        }
+    },
     getAll: {
         value: (resource) => {
             return fetch(`${remoteURL}/${resource}`)
