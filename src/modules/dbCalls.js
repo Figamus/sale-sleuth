@@ -55,5 +55,16 @@ export default Object.create(null, {
                 body: JSON.stringify(newObject)
             }).then(e => e.json())
         }
-    }
+    },
+    getProduct: {
+        value: (id) => { 
+            return fetch(`http://localhost:5003/products/${id}`)
+            .then(r => r.json())
+        }
+    },
+    getAllProducts: {
+        value: (id) => { 
+            return fetch(`http://localhost:5003/products/`)
+        }
+    },
 })
