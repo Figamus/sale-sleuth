@@ -1,23 +1,19 @@
-const remoteURL = "http://localhost:5002"
-// const PriceHistoryDatabase = "http://localhost:5003"
-// const retailer = "http://localhost:5004"
-
 export default Object.create(null, {
     get: {
         value: (resource, id) => { 
-            return fetch(`${remoteURL}/${resource}/${id}`)
+            return fetch(`http://localhost:5002/${resource}/${id}`)
             .then(r => r.json())
         }
     },
     getAll: {
         value: (resource) => {
-            return fetch(`${remoteURL}/${resource}`)
+            return fetch(`http://localhost:5002/${resource}`)
             .then(r => r.json())
         }
     },
     delete: {
         value: (resource, id) => {
-            return fetch(`${remoteURL}/${resource}/${id}`, {
+            return fetch(`http://localhost:5002/${resource}/${id}`, {
                 method: "DELETE"
             })
             .then(r => r.json())
@@ -25,7 +21,7 @@ export default Object.create(null, {
     },
     post: {
         value: (resource, newObject) => {
-            return fetch(`${remoteURL}/${resource}`, {
+            return fetch(`http://localhost:5002/${resource}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -36,7 +32,7 @@ export default Object.create(null, {
     },
     put: {
         value: (resource, newObject, id) => {
-            return fetch(`${remoteURL}/${resource}/${id}`, {
+            return fetch(`http://localhost:5002/${resource}/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -47,7 +43,7 @@ export default Object.create(null, {
     },
     patch: {
         value: (resource, newObject, id) => {
-            return fetch(`${remoteURL}/${resource}/${id}`, {
+            return fetch(`http://localhost:5002/${resource}/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"

@@ -10,6 +10,7 @@ export default class User extends Component {
 
     buildCard () {
         let cardsArray = [];
+        console.log(this.props.mainState);
         cardsArray.push(this.props.mainState.userTrackedProduct.map((item) => {
                 let product = this.props.mainState.products.find(arrayItem => arrayItem.id === item.productID)
                 let prices = this.props.mainState.priceHistory.filter(price => price.productID === item.productID)
@@ -32,8 +33,8 @@ export default class User extends Component {
                                     })
                                 }
                             </ul>
-                            <p><button type="button" className="btn btn-default">Details</button></p>
-                            <p><button type="button" className="btn btn-default" onClick={() => this.props.allFunctions.delete("userTrackedProduct", item.id)}>Untrack</button></p>
+                            <p><button type="button" className="btn btn-default" onClick={() => this.props.history.push(`/tracking/details/${item.id}`)}>Details</button></p>
+                            <p><button type="button" className="btn btn-default" onClick={() => this.untrackItem("userTrackedProduct", item.id)}>Untrack</button></p>
                         </div>
                     </div>
                 </div>}))
@@ -41,10 +42,19 @@ export default class User extends Component {
             cards: cardsArray
         })
     }
+
     componentDidMount () {
         this.buildCard()
     }
-    
+
+    untrackItem (resource, id) {
+        Promise.resolve(this.props.allFunctions.delete(resource, id))
+        .then (() => {
+            setTimeout(() => {
+                this.buildCard();
+        },500)
+        })
+    }
     render() {
         return (
             <React.Fragment>
