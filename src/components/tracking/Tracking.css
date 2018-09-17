@@ -38,3 +38,14 @@
     border-radius: 50%;
     border: 5px solid rgba(0,0,30,0.8);
 }
+
+.listItem {
+    max-height: 100px;
+    width: 80%;
+    overflow: hidden;
+}
+.listItem:hover {
+    width: 80%;
+    height: 100px;
+    overflow: scroll;
+}

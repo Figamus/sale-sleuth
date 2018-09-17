@@ -71,7 +71,17 @@ export default class App extends Component {
     getProduct: async function (id) {
       dbCalls.getProduct(id)
       .then((r)=> {return r})
-  }
+  },
+  delete: (resource, id) => {
+    dbCalls.delete(resource, id)
+    .then(() => dbCalls.getAll(resource))
+    .then(resource => {
+        let counter = resource.filter((tp) => tp.userID === this.state.activeUser.id)
+        this.setState({
+            resource: counter
+            })
+      })
+    }
 }
 
   render() {
