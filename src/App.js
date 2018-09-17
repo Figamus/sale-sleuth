@@ -5,6 +5,7 @@ import Registration from "./components/registration/Registration";
 import Main from "./components/Main";
 import User from "./components/user/User";
 import Tracking from "./components/tracking/Tracking";
+import TrackingDetails from "./components/tracking/TrackingDetails";
 import AuthRoute from "./AuthRoute";
 import dbCalls from "./modules/dbCalls";
 import './App.css';
@@ -68,18 +69,17 @@ export default class App extends Component {
       activeUser: stateToChange
       })
     },
-    getProduct: async function (id) {
+    getProduct: (id) => {
       dbCalls.getProduct(id)
       .then((r)=> {return r})
   },
   delete: (resource, id) => {
     dbCalls.delete(resource, id)
     .then(() => dbCalls.getAll(resource))
-    .then(resource => {
-        let counter = resource.filter((tp) => tp.userID === this.state.activeUser.id)
-        this.setState({
-            resource: counter
-            })
+    .then(response => {
+        let counter = response.filter((tp) => tp.userID === this.state.activeUser.id)
+        this.setState({[resource]: counter})
+        console.log(this.state)
       })
     }
 }
@@ -101,6 +101,9 @@ export default class App extends Component {
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
         <AuthRoute path="/tracking" Destination={Tracking}
+        mainState = {this.state}
+        allFunctions={this.allFunctions}/>
+        <AuthRoute path="/tracking/details/:itemId(\d+)" Destination={TrackingDetails}
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
       </React.Fragment>
