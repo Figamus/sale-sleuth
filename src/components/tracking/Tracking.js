@@ -4,37 +4,32 @@ import person from "../../images/person.png"
 import "./Tracking.css"
 
 export default class User extends Component {
-    state = {
-        userTrackedProduct: [],
-    }
-    componentDidMount() {
-        let counter = this.props.mainState.userTrackedProduct.filter((tp) => tp.userID === this.props.mainState.activeUser.id)
-        console.log(counter)
-        this.setState({
-            userTrackedProduct: counter
-            })
-    }
-
-    buildCard = () =>{
-        return this.state.userTrackedProduct.map((item) => {
-            return <div key={item.id} className="col-sm-4">
+    buildCard = () => {
+        return this.props.mainState.userTrackedProduct.map((item) => {
+            let product = this.props.mainState.products.find(arrayItem => arrayItem.id === item.productID)
+            let prices = this.props.mainState.priceHistory.filter(price => price.productID === item.productID)
+            return <div key={item.id} className="col-sm-3">
                 <div className="card">
                     <canvas className="header-bg" width="250" height="70" id="header-blur"></canvas>
                     <div className="avatar">
                         <img src={person} alt=""/>
                     </div>
                     <div className="content">
-                        <p>{item.brand} <br></br>
-                        {item.model}<br></br>
-                        {item.upc}<br></br>
-                        {item.price}
+                        <p>Brand: {product.brand} <br></br>
+                        Model#: {product.model}<br></br>
+                        UPC: {product.upc}<br></br>
+                        Current Price: ${product.price}<br></br>
+                        Price History: {prices.map((x) => {
+                        return `${x.productPrice} ${x.date}`
+                    })
+                            }
                         </p>
                         <p><button type="button" className="btn btn-default">Contact</button></p>
                     </div>
                 </div>
-            </div>
-        })
-    }
+            </div>})
+        }
+    
     render() {
         return (
             <React.Fragment>

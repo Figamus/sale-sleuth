@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import person from "../../images/person.png"
+// import person from "../../images/person.png"
 
 
 export default class User extends Component {
-    totalProduct = () =>{
-        let counter = this.props.mainState.userTrackedProduct.filter((tp) => tp.userID === this.props.mainState.activeUser.id)
-        return counter.length
-    }
-
     render() {
         return (
             <React.Fragment>
@@ -31,7 +26,7 @@ export default class User extends Component {
                                             <dt>Registered since:</dt>
                                             <dd>11/12/2013</dd>
                                             <dt>Tracked Products</dt>
-                                            <dd>{this.totalProduct()}</dd>
+                                            <dd>{this.props.mainState.userTrackedProduct.length}</dd>
                                         </dl>
                                     </div>
                                 <div className=" col-md-9 col-lg-9 hidden-xs hidden-sm">
@@ -48,7 +43,7 @@ export default class User extends Component {
                                         </tr>
                                         <tr>
                                             <td>Tracked Products</td>
-                                            <td>{this.totalProduct()}</td>
+                                            <td>{this.props.mainState.userTrackedProduct.length}</td>
                                         </tr>
                                         </tbody>
                                     </table>

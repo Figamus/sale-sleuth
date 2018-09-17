@@ -14,11 +14,13 @@ export default class App extends Component {
     activeUser: {},
     allUsers: [],
     userTrackedProduct: [],
-    priceHistory: []
+    priceHistory: [],
+    products: []
   }
 
   componentDidMount() {
     let retrievedUser = JSON.parse(sessionStorage.getItem("user"))
+    let trackedProducts = []
     if (retrievedUser !== null) {
         this.setState({
         activeUser: retrievedUser
@@ -36,14 +38,25 @@ export default class App extends Component {
       })
       .then(() => dbCalls.getAll("userTrackedProduct"))
       .then(userTrackedProduct => {
+        let counter = userTrackedProduct.filter((tp) => tp.userID === this.state.activeUser.id)
         this.setState({
-          userTrackedProduct: userTrackedProduct
-          })
+            userTrackedProduct: counter
+            })
       })
       .then(() => dbCalls.getAll("priceHistory"))
       .then(priceHistory => {
         this.setState({
           priceHistory: priceHistory
+          }) 
+      })
+      .then(() => this.state.userTrackedProduct.map((item) => {
+        return dbCalls.getProduct(item.productID)
+        .then((product) => {
+          trackedProducts.push(product)})
+      }))
+      .then(() => {
+        this.setState({
+          products: trackedProducts
           })
       })
   }
@@ -55,10 +68,11 @@ export default class App extends Component {
       activeUser: stateToChange
       })
     },
-    getProduct: (id) => {
+    getProduct: async function (id) {
       dbCalls.getProduct(id)
-      .then((r) => r)}
+      .then((r)=> {return r})
   }
+}
 
   render() {
     return (
