@@ -14,13 +14,13 @@ class Search extends Component {
             })
     }
     
-    trackItem = (resource, id) => {
+    trackItem = (resource, product) => {
         let newObject = {
             userID: this.props.mainState.activeUser.id,
-            productID: id
+            productID: product.id
         }
         this.props.allFunctions.post(resource, newObject)
-        setTimeout(() => {this.props.history.push("/tracking")},500)
+        alert(`You are now tracking ${product.brand} ${product.model}`)
         ;
     }
     render() {
@@ -51,7 +51,7 @@ class Search extends Component {
                 <div>
                     <ul>
                         {filteredProducts.map((product) => {
-                            return (<li key={`product-${product.id}`}>{product.brand} {product.model} <button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product.id)}>Track Item</button></li>
+                            return (<li key={`product-${product.id}`}>{product.brand} {product.model} <button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button></li>
                             )
                         })}
                     </ul>
