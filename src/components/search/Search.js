@@ -24,9 +24,20 @@ class Search extends Component {
         ;
     }
     render() {
-        let filteredProducts = this.props.mainState.products.filter(
+        let newProducts = this.props.mainState.products.map((product) =>{
+            return {
+                id: product.id,
+                fullName: `${product.brand} ${product.model} ${product.upc} ${product.type}`,
+                brand: product.brand,
+                model: product.model,
+                upc: product.upc,
+                type: product.type,
+                price: product.price
+            }
+        })
+        let filteredProducts = newProducts.filter(
             (product) => {
-                return product.brand.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+                return product.fullName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
             }
         );
         return (
@@ -39,22 +50,19 @@ class Search extends Component {
                                     <i className="fas fa-search h4 text-body"></i>
                                 </div>
                                 <div className="col">
-                                    <input className="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords" value={this.state.search} onChange={this.updateSearch.bind(this)}></input>
-                                </div>
-                                <div className="col-auto">
-                                    <button className="btn btn-lg btn-success" type="submit">Search</button>
+                                    <input className="form-control form-control-lg form-control-borderless" type="search" placeholder="Filter by Brand name, Model number or UPC code" value={this.state.search} onChange={this.updateSearch.bind(this)}></input>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div>
-                    <ul>
+                    <div className="row">
                         {filteredProducts.map((product) => {
-                            return (<li key={`product-${product.id}`}>{product.brand} {product.model} <button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button></li>
+                            return (<div key={`product-${product.id}`} className="col-sm-3"><div>{product.brand} {product.model}</div> <div>UPC#: {product.upc}</div> <div>Product Type: {product.type}</div><button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button></div>
                             )
                         })}
-                    </ul>
+                    </div>
                 </div>
             </div>
         )
