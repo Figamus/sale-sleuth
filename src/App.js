@@ -5,6 +5,7 @@ import Registration from "./components/registration/Registration";
 import Main from "./components/Main";
 import User from "./components/user/User";
 import Tracking from "./components/tracking/Tracking";
+import Search from "./components/search/Search";
 import TrackingDetails from "./components/tracking/TrackingDetails";
 import AuthRoute from "./AuthRoute";
 import dbCalls from "./modules/dbCalls";
@@ -21,7 +22,6 @@ export default class App extends Component {
 
   componentDidMount() {
     let retrievedUser = JSON.parse(sessionStorage.getItem("user"))
-    let trackedProducts = []
     if (retrievedUser !== null) {
         this.setState({
         activeUser: retrievedUser
@@ -50,15 +50,11 @@ export default class App extends Component {
           priceHistory: priceHistory
           }) 
       })
-      .then(() => this.state.userTrackedProduct.map((item) => {
-        return dbCalls.getProduct(item.productID)
-        .then((product) => {
-          trackedProducts.push(product)})
-      }))
-      .then(() => {
+      .then(() => dbCalls.getAllProducts())
+      .then(products => {
         this.setState({
-          products: trackedProducts
-          })
+          products: products
+          }) 
       })
   }
 
@@ -69,17 +65,27 @@ export default class App extends Component {
       activeUser: stateToChange
       })
     },
+    post: (resource, newObject) => {
+    dbCalls.post(resource, newObject)
+    .then(() => dbCalls.getAll(resource))
+    .then(response => {
+      console.log(response)
+      let counter = response.filter((tp) => tp.userID === this.state.activeUser.id)
+      this.setState({
+        [resource]: counter
+      })
+    })
+    },
     getProduct: (id) => {
       dbCalls.getProduct(id)
       .then((r)=> {return r})
-  },
-  delete: (resource, id) => {
+    },
+    delete: (resource, id, callback) => {
     dbCalls.delete(resource, id)
     .then(() => dbCalls.getAll(resource))
     .then(response => {
         let counter = response.filter((tp) => tp.userID === this.state.activeUser.id)
         this.setState({[resource]: counter})
-        console.log(this.state)
       })
     }
 }
@@ -101,6 +107,9 @@ export default class App extends Component {
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
         <AuthRoute path="/tracking" Destination={Tracking}
+        mainState = {this.state}
+        allFunctions={this.allFunctions}/>
+        <AuthRoute path="/search" Destination={Search}
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
         <AuthRoute path="/tracking/details/:itemId(\d+)" Destination={TrackingDetails}

@@ -19,6 +19,9 @@ class NavBar extends Component {
                         <Link className="nav-link" to="/tracking">Tracked Products</Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" to="/search">Track A New Product</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link className="nav-link" to="/user">User Profile</Link>
                     </li>
                     <button className="Logout btn btn-info" onClick={this.handleLogout}>Logout</button>

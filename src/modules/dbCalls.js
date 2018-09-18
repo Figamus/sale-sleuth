@@ -59,8 +59,9 @@ export default Object.create(null, {
         }
     },
     getAllProducts: {
-        value: (id) => { 
+        value: () => { 
             return fetch(`http://localhost:5003/products/`)
+            .then(r => r.json())
         }
     },
 })
