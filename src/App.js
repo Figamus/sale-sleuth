@@ -5,6 +5,7 @@ import Registration from "./components/registration/Registration";
 import Main from "./components/Main";
 import User from "./components/user/User";
 import Tracking from "./components/tracking/Tracking";
+import Search from "./components/search/Search";
 import TrackingDetails from "./components/tracking/TrackingDetails";
 import AuthRoute from "./AuthRoute";
 import dbCalls from "./modules/dbCalls";
@@ -101,6 +102,9 @@ export default class App extends Component {
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
         <AuthRoute path="/tracking" Destination={Tracking}
+        mainState = {this.state}
+        allFunctions={this.allFunctions}/>
+        <AuthRoute path="/search" Destination={Search}
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
         <AuthRoute path="/tracking/details/:itemId(\d+)" Destination={TrackingDetails}
