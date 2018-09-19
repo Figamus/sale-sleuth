@@ -43,16 +43,16 @@ export default class UserEdit extends Component {
                                     </div>
                                     <div className=" col-9 mx-auto">
                                         <strong>{this.props.mainState.activeUser.userName}</strong><br></br>
-                                        <div class="row align-items-center">
-                                            <div class="col-4">
+                                        <div className="row align-items-center">
+                                            <div className="col-4">
                                                 <label>Change Username</label>
                                                 <input id="userName" defaultValue={this.props.mainState.activeUser.userName} onChange={this.handleFieldChange}></input>
                                             </div>
-                                            <div class="col-4">
+                                            <div className="col-4">
                                             <   label>Change E-mail</label>
                                             <input id="email" defaultValue={this.props.mainState.activeUser.email} onChange={this.handleFieldChange}></input>
                                             </div>
-                                            <div class="col-4">
+                                            <div className="col-4">
                                                 <label>Change Password</label>
                                                 <input id="password" onChange={this.handleFieldChange}></input>
                                             </div>
