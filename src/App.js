@@ -4,6 +4,7 @@ import Login from "./components/login/Login";
 import Registration from "./components/registration/Registration";
 import Main from "./components/Main";
 import User from "./components/user/User";
+import UserEdit from "./components/user/UserEdit";
 import Tracking from "./components/tracking/Tracking";
 import Search from "./components/search/Search";
 import TrackingDetails from "./components/tracking/TrackingDetails";
@@ -100,19 +101,22 @@ export default class App extends Component {
           return <Login {...props}
           getActiveUser={this.getActiveUser}/>
           }} />
-        <AuthRoute path="/" Destination={Main}
+        <AuthRoute exact path="/" Destination={Main}
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
-        <AuthRoute path="/user" Destination={User}
+        <AuthRoute exact path="/user" Destination={User}
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
-        <AuthRoute path="/tracking" Destination={Tracking}
+        <AuthRoute exact path="/user/edit" Destination={UserEdit}
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
-        <AuthRoute path="/search" Destination={Search}
+        <AuthRoute exact path="/tracking" Destination={Tracking}
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
-        <AuthRoute path="/tracking/details/:itemId(\d+)" Destination={TrackingDetails}
+        <AuthRoute exact path="/search" Destination={Search}
+        mainState = {this.state}
+        allFunctions={this.allFunctions}/>
+        <AuthRoute exact path="/tracking/details/:itemId(\d+)" Destination={TrackingDetails}
         mainState = {this.state}
         allFunctions={this.allFunctions}/>
       </React.Fragment>
