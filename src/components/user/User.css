@@ -1,0 +1,10 @@
+.profile-image {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.mainRow {
+    width: 100%;
+    margin-top: 10px;
+}
