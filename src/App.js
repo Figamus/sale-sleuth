@@ -66,6 +66,9 @@ export default class App extends Component {
       activeUser: stateToChange
       })
     },
+    put: (resource, newObject, id) => {
+      dbCalls.put(resource, newObject, id)
+    },
     post: (resource, newObject) => {
     dbCalls.post(resource, newObject)
     .then(() => dbCalls.getAll(resource))
@@ -81,7 +84,7 @@ export default class App extends Component {
       dbCalls.getProduct(id)
       .then((r)=> {return r})
     },
-    delete: (resource, id, callback) => {
+    delete: (resource, id) => {
     dbCalls.delete(resource, id)
     .then(() => dbCalls.getAll(resource))
     .then(response => {

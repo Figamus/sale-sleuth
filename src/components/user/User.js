@@ -8,8 +8,8 @@ export default class User extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className="row user-infos">
-                    <div className="col-6 mx-auto">
+                <div className="row mainRow text-light">
+                    <div className="col-6 mx-auto bg-dark rounded shadow">
                         <div className="panel panel-primary">
                             <div className="panel-heading">
                                 <h3 className="panel-title">{this.props.mainState.activeUser.userName}</h3>
