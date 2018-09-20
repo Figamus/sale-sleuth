@@ -11,9 +11,9 @@ class Search extends Component {
     updateSearch(event) {
         this.setState({
             search: event.target.value.substr(0)
-            })
+        })
     }
-    
+
     trackItem = (resource, product) => {
         let newObject = {
             userID: this.props.mainState.activeUser.id,
@@ -21,10 +21,10 @@ class Search extends Component {
         }
         this.props.allFunctions.post(resource, newObject)
         alert(`You are now tracking ${product.brand} ${product.model}`)
-        ;
+            ;
     }
     render() {
-        let newProducts = this.props.mainState.products.map((product) =>{
+        let newProducts = this.props.mainState.products.map((product) => {
             return {
                 id: product.id,
                 fullName: `${product.brand} ${product.model} ${product.upc} ${product.type}`,
@@ -59,7 +59,21 @@ class Search extends Component {
                 <div>
                     <div className="row">
                         {filteredProducts.map((product) => {
-                            return (<div key={`product-${product.id}`} className="col-sm-3"><div>{product.brand} {product.model}</div> <div>UPC#: {product.upc}</div> <div>Product Type: {product.type}</div><button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button></div>
+                            return (
+                                <div key={`product-${product.id}`} className="col-sm-3">
+                                <div className="inner card bg-dark">
+                                    <div>
+                                        {product.brand} {product.model}
+                                    </div>
+                                    <div>
+                                        UPC#: {product.upc}
+                                    </div>
+                                    <div>
+                                        Product Type: {product.type}
+                                    </div>
+                                    <button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button>
+                            </div>
+                            </div>
                             )
                         })}
                     </div>

@@ -7,3 +7,11 @@
     outline: none;
     box-shadow: none;
 }
+
+.inner {
+    margin: 5px;
+}
+.mainRow {
+    width: 100%;
+    margin-top: 10px;
+}
