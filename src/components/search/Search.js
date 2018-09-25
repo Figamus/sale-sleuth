@@ -61,19 +61,19 @@ class Search extends Component {
                         {filteredProducts.map((product) => {
                             return (
                                 <div key={`product-${product.id}`} className="col-sm-3">
-                                <div className="inner card bg-dark">
-                                    <div>
-                                        {product.brand} {product.model}
+                                    <div className="inner card bg-dark">
+                                        <div>
+                                            {product.brand} {product.model}
+                                        </div>
+                                        <div>
+                                            UPC#: {product.upc}
+                                        </div>
+                                        <div>
+                                            Product Type: {product.type}
+                                        </div>
+                                        <button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button>
                                     </div>
-                                    <div>
-                                        UPC#: {product.upc}
-                                    </div>
-                                    <div>
-                                        Product Type: {product.type}
-                                    </div>
-                                    <button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button>
-                            </div>
-                            </div>
+                                </div>
                             )
                         })}
                     </div>

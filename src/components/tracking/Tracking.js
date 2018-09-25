@@ -8,7 +8,7 @@ export default class User extends Component {
         cards: []
     }
 
-    componentDidMount () {
+    componentDidMount() {
         let cardsArray = this.props.mainState.userTrackedProduct.map((item) => {
             let product = this.props.mainState.products.find(arrayItem => arrayItem.id === item.productID);
             let prices = this.props.mainState.priceHistory.filter(price => price.productID === item.productID);
@@ -24,7 +24,7 @@ export default class User extends Component {
         })
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         let cardsArray = nextProps.mainState.userTrackedProduct.map((item) => {
             let product = nextProps.mainState.products.find(arrayItem => arrayItem.id === item.productID);
             let prices = nextProps.mainState.priceHistory.filter(price => price.productID === item.productID);
@@ -40,7 +40,7 @@ export default class User extends Component {
         })
     }
 
-    untrackItem (resource, id) {
+    untrackItem(resource, id) {
         this.props.allFunctions.delete(resource, id)
     }
 
@@ -48,31 +48,36 @@ export default class User extends Component {
         return (
             <React.Fragment>
                 <div className="row">
-                {this.state.cards.map((card) => {
-                    return <div key={`card--${card.id}`} className="col-sm-3">
-                                <div className="card">
-                                    <canvas className="header-bg" width="250" height="70" id="header-blur"></canvas>
-                                    <div className="avatar">
-                                        <img src={person} alt=""/>
-                                    </div>
-                                    <div className="content">
-                                        <p>Brand: {card.product.brand} <br></br>
-                                        Model#: {card.product.model}<br></br>
-                                        UPC: {card.product.upc}<br></br>
-                                        Current Price: ${card.product.price}<br></br>
-                                        Price History:
+                    <div className="col-11 mx-auto">
+                        <div className="row">
+                            {this.state.cards.map((card) => {
+                                return (
+                                <div key={`card--${card.id}`} className="col-3">
+                                    <div className="card bg-dark inner">
+                                        <div className="avatar">
+                                            <img src={person} alt="" />
+                                        </div>
+                                        <div className="content">
+                                            <p>Brand: {card.product.brand}<br />
+                                                Model#: {card.product.model}<br />
+                                                UPC: {card.product.upc}<br />
+                                                Current Price: ${card.product.price}<br />
+                                                Price History:
                                         </p>
-                                        <ul className="list-group list-group-flush listItem mx-auto">
-                                        {card.prices.map((price) => {
-                                            return <li key={`price--${price.id}`} className="list-group-item">{price.date} ${price.productPrice}</li>
+                                            <ul className="list-group list-group-flush listItem mx-auto">
+                                                {card.prices.map((price) => {
+                                                    return <li key={`price--${price.id}`} className="list-group-item">{price.date} ${price.productPrice}</li>
                                                 })
-                                            }
-                                        </ul>
-                                        <p><button type="button" className="btn btn-default" onClick={() => this.props.history.push(`/tracking/details/${card.id}`)}>Details</button></p>
-                                        <p><button type="button" className="btn btn-default" onClick={() => this.untrackItem("userTrackedProduct", card.userTrackedProductID)}>Untrack</button></p>
+                                                }
+                                            </ul>
+                                            <p><button type="button" className="btn btn-default" onClick={() => this.props.history.push(`/tracking/details/${card.id}`)}>Details</button></p>
+                                            <p><button type="button" className="btn btn-default" onClick={() => this.untrackItem("userTrackedProduct", card.userTrackedProductID)}>Untrack</button></p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>})}
+                                </div>)
+                            })}
+                        </div>
+                    </div>
                 </div>
             </React.Fragment>
         )
