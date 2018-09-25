@@ -98,11 +98,12 @@ export default class App extends Component {
     return (
       <React.Fragment>
         <Route exact path="/registration" render={(props) => {
-          return <Registration {...props}/>
+          return <Registration {...props}
+          allFunctions={this.allFunctions}/>
           }} />
         <Route exact path="/login" render={(props) => {
           return <Login {...props}
-          getActiveUser={this.getActiveUser}/>
+          allFunctions={this.allFunctions}/>
           }} />
         <AuthRoute exact path="/" Destination={Main}
         mainState = {this.state}

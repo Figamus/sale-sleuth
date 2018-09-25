@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import dbCalls from "../../modules/dbCalls"
+import "./Registration.css"
 
 export default class Registration extends Component {
     state = {
@@ -35,33 +36,19 @@ export default class Registration extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="card bg-dark mx-auto">
-                    <form>
-                        <h1 className="h3 mb-3 font-weight-normal">
-                            Please Register
-                </h1>
-                        <fieldset>
-                            <label htmlFor="inputuserName">User Name: </label>
-                            <input onChange={this.handleFieldChange} type="text" id="userName" placeholder="User Name" required="" autoFocus="" />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="inputEmail">E-mail: </label>
-                            <input onChange={this.handleFieldChange} type="email" id="email" placeholder="E-mail" required="" autoFocus="" />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="inputPassword">Password: </label>
-                            <input onChange={this.handleFieldChange} type="password" id="password" placeholder="Password" required="" />
-                        </fieldset>
-                        <fieldset>
-                            <button type="submit" onClick={this.handleRegistration}>Register</button>
-                        </fieldset>
-                        <fieldset>
-                            <button type="submit" onClick={this.handleLogin}>Return to Login</button>
-                        </fieldset>
+            <div className="login-page ">
+                <div className="form bg-dark" id="form">
+                <h1>Sale Sleuth</h1>
+                    <form className="register-form">
+                        <input type="text" id="userName" onChange={this.handleFieldChange} placeholder="User Name" />
+                        <input type="text"  id="email" onChange={this.handleFieldChange} placeholder="E-mail Address" />
+                        <input type="password"  id="password" onChange={this.handleFieldChange} placeholder="Password" />
+                        <button type="submit" onClick={this.handleRegistration}>create</button>
+                        <p className="message">Already registered? <a onClick={this.handleLogin} href="">Sign In</a></p>
                     </form>
                 </div>
             </div>
         )
     }
 }
+
