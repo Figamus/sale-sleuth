@@ -80,7 +80,8 @@ export default class User extends Component {
             let product = this.props.mainState.products.find(arrayItem => arrayItem.id === item.productID);
             let prices = this.props.mainState.priceHistory.filter(price => price.productID === item.productID);
             return {
-                id: item.id,
+                id: product.id,
+                userTrackedProductID: item.id,
                 product: product,
                 prices: prices
             }
@@ -95,7 +96,8 @@ export default class User extends Component {
             let product = nextProps.mainState.products.find(arrayItem => arrayItem.id === item.productID);
             let prices = nextProps.mainState.priceHistory.filter(price => price.productID === item.productID);
             return {
-                id: item.id,
+                id: product.id,
+                userTrackedProductID: item.id,
                 product: product,
                 prices: prices
             }
@@ -114,7 +116,7 @@ export default class User extends Component {
             <React.Fragment>
                 <div className="row">
                 {this.state.cards.map((card) => {
-                    return <div key={card.id} className="col-sm-3">
+                    return <div key={`card--${card.id}`} className="col-sm-3">
                                 <div className="card">
                                     <canvas className="header-bg" width="250" height="70" id="header-blur"></canvas>
                                     <div className="avatar">
@@ -128,13 +130,13 @@ export default class User extends Component {
                                         Price History:
                                         </p>
                                         <ul className="list-group list-group-flush listItem mx-auto">
-                                        {card.prices.map((x) => {
-                                            return <li key={`price${x.id}`} className="list-group-item">{x.date} ${x.productPrice}</li>
+                                        {card.prices.map((price) => {
+                                            return <li key={`price--${price.id}`} className="list-group-item">{price.date} ${price.productPrice}</li>
                                                 })
                                             }
                                         </ul>
                                         <p><button type="button" className="btn btn-default" onClick={() => this.props.history.push(`/tracking/details/${card.id}`)}>Details</button></p>
-                                        <p><button type="button" className="btn btn-default" onClick={() => this.untrackItem("userTrackedProduct", card.id)}>Untrack</button></p>
+                                        <p><button type="button" className="btn btn-default" onClick={() => this.untrackItem("userTrackedProduct", card.userTrackedProductID)}>Untrack</button></p>
                                     </div>
                                 </div>
                             </div>})}

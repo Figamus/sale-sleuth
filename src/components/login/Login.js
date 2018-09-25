@@ -21,8 +21,8 @@ export default class Login extends Component {
                 let userMatched = users.find(user => user.userName === this.state.userName && user.password === this.state.password)
                 if (userMatched) {
                     sessionStorage.setItem("user", JSON.stringify(userMatched));
-                    alert("Succefully Logged In.")
                     this.props.allFunctions.getActiveUser();
+                    alert("Succefully Logged In.")
                     this.props.history.push("/");
                 } else {
                     alert("Username or Password is incorrect. If you do not have an account, please register.")
