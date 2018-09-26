@@ -44,7 +44,7 @@ class Search extends Component {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12">
-                        <form className="card card-sm">
+                        <form className="card rounded-0 borde border-primary shadow card-sm">
                             <div className="card-body row no-gutters align-items-center">
                                 <div className="col-auto">
                                     <i className="fas fa-search h4 text-body"></i>
@@ -61,7 +61,7 @@ class Search extends Component {
                         {filteredProducts.map((product) => {
                             return (
                                 <div key={`product-${product.id}`} className="col-sm-3">
-                                    <div className="inner card bg-dark">
+                                    <div className="inner card bg-dark rounded-0 border border-secondary shadow ">
                                         <div>
                                             {product.brand} {product.model}
                                         </div>
@@ -71,7 +71,7 @@ class Search extends Component {
                                         <div>
                                             Product Type: {product.type}
                                         </div>
-                                        <button key={`productButton-${product.id}`} className="btn btn-lg btn-success" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button>
+                                        <button key={`productButton-${product.id}`} className="btn btn-lg btn-success rounded-0 button" type="submit" onClick={() => this.trackItem("userTrackedProduct", product)}>Track Item</button>
                                     </div>
                                 </div>
                             )

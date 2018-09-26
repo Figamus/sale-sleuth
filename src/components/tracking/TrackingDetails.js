@@ -20,7 +20,7 @@ export default class TrackingDetails extends Component {
         <React.Fragment>
             <div className="row">
                 <div className="col-md-8 mx-auto">
-                    <div className="card bg-dark flex-md-row mb-4 box-shadow">
+                    <div className="card bg-dark flex-md-row mb-4 box-shadow rounded-0 border-0">
                         <div className="card-body bg-dark">
                             <h3 className="mb-0">{this.state.product.brand} {this.state.product.model}</h3>
                             <div className="card-text mb-auto">Brand: {this.state.product.brand}</div>
