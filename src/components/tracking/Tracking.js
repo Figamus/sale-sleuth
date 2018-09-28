@@ -70,8 +70,8 @@ export default class User extends Component {
                                                 })
                                                 }
                                             </ul>
-                                            <p><button type="button" className="btn btn-lg btn-success rounded-0 button" onClick={() => this.props.history.push(`/tracking/details/${card.id}`)}>Details</button></p>
-                                            <p><button type="button" className="btn btn-sm btn-danger rounded-0 button-danger" onClick={() => this.untrackItem("userTrackedProduct", card.userTrackedProductID)}>Untrack</button></p>
+                                            <p><button type="button" className="btn btn-lg btn-success rounded-0 tracking-button" onClick={() => this.props.history.push(`/tracking/details/${card.id}`)}>Details</button></p>
+                                            <p><button type="button" className="btn btn-sm btn-danger rounded-0 tracking-button-danger" onClick={() => this.untrackItem("userTrackedProduct", card.userTrackedProductID)}>Untrack</button></p>
                                         </div>
                                     </div>
                                 </div>)
