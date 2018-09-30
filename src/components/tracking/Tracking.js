@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import person from "../../images/person.png"
+import Computer from "../../images/computer.png"
+import Appliance from "../../images/appliance.png"
+import Outdoors from "../../images/outdoors.png"
+import Apparel from "../../images/apparel.png"
+import HealthBeauty from "../../images/health-beauty.png"
+import Tools from "../../images/tools.png"
+import Toys from "../../images/toy.png"
+import Home from "../../images/home.png"
+import Books from "../../images/books.png"
+import Automotive from "../../images/automotive.png"
+import Sports from "../../images/sports.png"
+import Jewelry from "../../images/jewelry.png"
+import Electronics from "../../images/electronics.png"
+import Movies from "../../images/movies.png"
+import Gaming from "../../images/gaming.png"
+import Music from "../../images/music.png"
+import Person from "../../images/person.png"
 import "./Tracking.css"
 
 export default class User extends Component {
@@ -45,17 +61,57 @@ export default class User extends Component {
     }
 
     render() {
+        let filterImage = (card) => {
+            if (card.product.type === "Computers") {
+                return Computer
+            } else if (card.product.type === "Appliance") {
+                return Appliance
+            } else if (card.product.type === "Outdoors") {
+                return Outdoors
+            } else if (card.product.type === "Apparel") {
+                return Apparel
+            } else if (card.product.type === "Health & Beauty") {
+                return HealthBeauty
+            } else if (card.product.type === "Tools") {
+                return Tools
+            } else if (card.product.type === "Toys") {
+                return Toys
+            } else if (card.product.type === "Home") {
+                return Home
+            } else if (card.product.type === "Books") {
+                return Books
+            } else if (card.product.type === "Automotive") {
+                return Automotive
+            } else if (card.product.type === "Sports") {
+                return Sports
+            } else if (card.product.type === "Jewelry") {
+                return Jewelry
+            } else if (card.product.type === "Electronics") {
+                return Electronics
+            } else if (card.product.type === "Movies") {
+                return Movies
+            } else if (card.product.type === "Gaming") {
+                return Gaming
+            } else if (card.product.type === "Jewelry") {
+                return Jewelry
+            } else if (card.product.type === "Music") {
+                return Music
+            } else {
+                return Person
+            }
+        }
         return (
             <React.Fragment>
                 <div className="row">
                     <div className="col-11 mx-auto">
                         <div className="row">
                             {this.state.cards.map((card) => {
+                                let productImage = filterImage(card);
                                 return (
                                 <div key={`card--${card.id}`} className="col-3">
                                     <div className="card bg-dark inner rounded-0 border border-secondary shadow">
                                         <div className="avatar">
-                                            <img src={person} alt="" />
+                                            <img src={productImage} alt="" />
                                         </div>
                                         <div className="content">
                                             <p>Brand: {card.product.brand}<br />

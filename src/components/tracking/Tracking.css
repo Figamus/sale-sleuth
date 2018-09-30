@@ -89,3 +89,11 @@
 .tracking-button-danger:hover,.button-danger:active,.button-danger:focus {
     background: rgb(150, 20, 20);
 }
+.detailImage {
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 15px solid rgb(50, 50, 50);
+}
