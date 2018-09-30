@@ -20,44 +20,9 @@ export default class App extends Component {
     priceHistory: [],
     products: []
   }
-
-  componentDidMount() {
-    let retrievedUser = JSON.parse(sessionStorage.getItem("user"))
-    if (retrievedUser !== null) {
-        this.setState({
-        activeUser: retrievedUser
-        })
-      } else {
-        this.setState({
-          activeUser: {}
-        })
-      }
-      dbCalls.getAll("users")
-      .then(allUsers => {
-          this.setState({
-              allUsers: allUsers
-          })
-      })
-      .then(() => dbCalls.getAll("userTrackedProduct"))
-      .then(userTrackedProduct => {
-        let counter = userTrackedProduct.filter((tp) => tp.userID === this.state.activeUser.id)
-        this.setState({
-            userTrackedProduct: counter
-            })
-      })
-      .then(() => dbCalls.getAll("priceHistory"))
-      .then(priceHistory => {
-        this.setState({
-          priceHistory: priceHistory
-          }) 
-      })
-      .then(() => dbCalls.getAllProducts())
-      .then(products => {
-        this.setState({
-          products: products
-          }) 
-      })
-  }
+  // events => {newState.events = events}
+//   componentDidMount() {
+// }
 
   allFunctions = {
     getActiveUser: () => {
@@ -91,6 +56,33 @@ export default class App extends Component {
         let counter = response.filter((tp) => tp.userID === this.state.activeUser.id)
         this.setState({[resource]: counter})
       })
+    },
+    updateMainState: () => {
+      const newState = {};
+      let retrievedUser = JSON.parse(sessionStorage.getItem("user"))
+      if (retrievedUser) {
+        newState.activeUser = retrievedUser;
+        dbCalls.getAll("users")
+        .then(allUsers => {
+          newState.allUsers = allUsers
+        })
+        .then(() => dbCalls.getAll("userTrackedProduct"))
+        .then(userTrackedProduct => {
+          let counter = userTrackedProduct.filter((tp) => tp.userID === retrievedUser.id)
+          newState.userTrackedProduct = counter
+        })
+        .then(() => dbCalls.getAll("priceHistory"))
+        .then(priceHistory => {
+            newState.priceHistory = priceHistory
+        })
+        .then(() => dbCalls.getAllProducts())
+        .then(products => {
+            newState.products = products
+        })
+        .then(() => {
+          this.setState(newState) 
+        })
+    }
     }
 }
 
@@ -98,11 +90,12 @@ export default class App extends Component {
     return (
       <React.Fragment>
         <Route exact path="/registration" render={(props) => {
-          return <Registration {...props}/>
+          return <Registration {...props}
+          allFunctions={this.allFunctions}/>
           }} />
         <Route exact path="/login" render={(props) => {
           return <Login {...props}
-          getActiveUser={this.getActiveUser}/>
+          allFunctions={this.allFunctions}/>
           }} />
         <AuthRoute exact path="/" Destination={Main}
         mainState = {this.state}

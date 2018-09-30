@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import dbCalls from "../../modules/dbCalls";
 import "bootstrap/dist/css/bootstrap.min.css"
+import "./Login.css"
 
 export default class Login extends Component {
     state = {
@@ -21,8 +22,7 @@ export default class Login extends Component {
                 let userMatched = users.find(user => user.userName === this.state.userName && user.password === this.state.password)
                 if (userMatched) {
                     sessionStorage.setItem("user", JSON.stringify(userMatched));
-                    this.props.allFunctions.getActiveUser();
-                    alert("Succefully Logged In.")
+                    this.props.allFunctions.updateMainState();
                     this.props.history.push("/");
                 } else {
                     alert("Username or Password is incorrect. If you do not have an account, please register.")
@@ -37,29 +37,14 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="card bg-dark mx-auto">
-                    <form>
-                        <h1 className="h3 mb-3 font-weight-normal mx-auto">
-                            Please Sign In
-                        </h1>
-                        <fieldset className="mx-auto">
-                            <label htmlFor="inputEmail">User Name: </label>
-                            <input onChange={this.handleFieldChange} type="text" id="userName" placeholder="User Name" required="" autoFocus="" />
-                        </fieldset>
-                        <fieldset className="mx-auto">
-                            <label htmlFor="inputPassword">Password: </label>
-                            <input onChange={this.handleFieldChange} type="password" id="password" placeholder="Password" required="" /></fieldset>
-                        <fieldset className="mx-auto">
-                            <label>Remember Me</label>
-                            <input type="checkbox" onChange={this.checkbox}></input>
-                        </fieldset>
-                        <fieldset className="mx-auto">
-                            <button type="submit" onClick={this.handleLogin}>Sign in</button>
-                        </fieldset>
-                        <fieldset className="mx-auto">
-                            <button type="submit" onClick={this.handleRegistration}>Register</button>
-                        </fieldset>
+            <div className="login-page ">
+                <div className="form bg-dark" id="form">
+                <h1>Sale Sleuth</h1>
+                    <form className="login-form ">
+                        <input type="text" id="userName" onChange={this.handleFieldChange} placeholder="User Name" />
+                        <input type="password" id="password" onChange={this.handleFieldChange} placeholder="Password" />
+                        <button onClick={this.handleLogin}>login</button>
+                        <p className="message">Not registered? <a onClick={this.handleRegistration} href="">Create an account</a></p>
                     </form>
                 </div>
             </div>

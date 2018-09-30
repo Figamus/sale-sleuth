@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-@import url('https://fonts.googleapis.com/css?family=Shrikhand');
 
 .login-page {
     width: 360px;
@@ -57,6 +56,9 @@
 .form .message a {
     color: #4CAF50;
     text-decoration: none;
+}
+.form .register-form {
+    display: block;
 }
 body {
     font-family: "Roboto", sans-serif;

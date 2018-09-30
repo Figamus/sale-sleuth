@@ -1,7 +1,9 @@
 .src-image {
     display: none;
 }
-
+.inner {
+    margin: 5px;
+}
 .card {
     overflow: hidden;
     position: relative;
@@ -14,14 +16,12 @@
  }
 
 .card .header-bg {
-    /* This stretches the canvas across the entire hero unit */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 70px;
     border-bottom: 1px #FFF solid;
-    /* This positions the canvas under the text */
     z-index: 1;
 }
 .card .avatar {
@@ -53,4 +53,47 @@
 .info-shit > img {
     width: 200px;
     height: 250px
+}
+
+.tracking-button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 50%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+.tracking-button:hover,.button:active,.button:focus {
+    background: #43A047;
+}
+.tracking-button-danger {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: rgb(165, 20, 20);
+    width: 50%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+.tracking-button-danger:hover,.button-danger:active,.button-danger:focus {
+    background: rgb(150, 20, 20);
+}
+.detailImage {
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 15px solid rgb(50, 50, 50);
 }
