@@ -42,3 +42,7 @@ body {
 .button:hover,.button:active,.button:focus {
     background: #43A047;
 }
+
+.avatar {
+    filter: contrast(50%);
+}

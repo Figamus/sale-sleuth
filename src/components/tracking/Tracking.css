@@ -97,3 +97,7 @@
     border-radius: 50%;
     border: 15px solid rgb(50, 50, 50);
 }
+
+.avatar {
+    filter: contrast(50%);
+}

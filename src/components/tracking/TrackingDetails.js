@@ -91,7 +91,7 @@ export default class TrackingDetails extends Component {
                                             }
                                         </ul>
                         </div>
-                            <img className="detailImage" alt="Thumbnail [200x250]" src={productImage} data-holder-rendered="true"></img>
+                            <img className="detailImage avatar" alt="Thumbnail [200x250]" src={productImage} data-holder-rendered="true"></img>
                     </div>
                 </div>
             </div>
